@@ -1,0 +1,113 @@
+<div id="container-instructions">
+
+	<h1>Demographic Information</h1>
+
+	<hr />
+
+	<div class="instructions well">
+        <p>Please indicate with which of the following statements most closely align with your gender identification:</p>
+        <form id="d1" action="">
+                <input type="radio" name="gender" id="genderfluid" value="genderfluid" />
+                <label for="genderfluid">I identify as genderfluid.</label>
+                <br/>
+                <input type="radio" name="gender" id="man" value="man" />
+                <label for="man">I identify as a man.</label>
+                <br/>
+                <input type="radio" name="gender" id="nonbinary" value="nonbinary" />
+                <label for="nonbinary">I identify as non-binary.</label>
+                <br/>
+                <input type="radio" name="gender" id="woman" value="woman" />
+                <label for="woman">I identify as a woman.</label>
+                <br/>
+                <input type="radio" name="gender" id="othergen" value="other" />
+                <label for="othergen">Other</label>
+                <input type="text" name="other_gender_text" />
+        </form>
+        
+        <br/>
+        <hr/>
+        <br/>
+        
+        <p>In what general area is your educational background or focus situated?</p>
+        <form id="d2" action="">
+                <input type="radio" name="education" id="cs" value="cs" />
+                <label for="cs">computer science</label>
+                <br/>
+                <input type="radio" name="education" id="eng" value="engineering" />
+                <label for="eng">engineering</label>
+                <br/>
+                <input type="radio" name="education" id="math" value="math" />
+                <label for="math">mathematics</label>
+                <br/>
+                <input type="radio" name="education" id="ps" value="physical sci" />
+                <label for="ps">physical sciences (e.g., biology)</label>
+                <br/>
+                <input type="radio" name="education" id="ss" value="social sci" />
+                <label for="ss">social sciences (e.g., psychology)</label>
+                <br/>
+                <input type="radio" name="education" id="othered" value="other" />
+                <label for="othered">Other</label>
+                <input type="text" name="other_education_text" />
+        </form>
+        
+        <br/>
+        <hr/>
+        <br/>
+        
+        <p>Have you ever directly interacted with a robot?</p>
+        <form id="d3" action="">
+                <input type="radio" name="prev_robot" id="no" value="no" />
+                <label for="no">no</label>
+                <br/>
+                <input type="radio" name="prev_robot" id="yes" value="yes" />
+                <label for="yes">yes</label>
+                <br/>
+        </form>
+        
+        <br/>
+        <hr/>
+        <br/>
+        
+        <p>What country are you from?</p>
+        <form action="">      
+            <input type="radio" name="nationality" value="Canadian" id="Canadian">
+            <label for="Canadian">Canada</label>
+            <br>
+            <input type="radio" name="nationality" value="Mexican" id="Mexican">
+            <label for="Mexican">Mexico</label>
+            <br>
+            <input type="radio" name="nationality" value="USA" id="USA">
+            <label for="USA">United States</label>
+            <br>
+            <input type="radio" name="nationality" value="other" id="other_nat">
+            <label for="other_nat">Other (please specify): </label>
+            <input type="text" name="other_nation_text" />
+        </form>
+        
+        <br/>
+        <hr/>
+        <br/>
+        
+        
+
+    </div>
+
+	<hr />
+
+
+   <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">	      
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue" disabled="disabled">
+                 <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,53 @@
+[HIT Configuration]
+title = HRI021: Robot Response to Abuse
+description = Answer questions about a video simulating an interaction with a robot.
+amt_keywords = Psychology, Trust, Robot, Robots, Language, Interaction
+lifetime = 24
+us_only = true
+approve_requirement = 80
+contact_email_on_error = bjackson@g.hmc.edu
+ad_group = Default psiTurk Robot Identity Performance
+psiturk_keywords = robots, trust, identity, language, interaction
+organization_name = MIRRORLab @ Colorado School of Mines
+browser_exclude_rule = MSIE, mobile, tablet
+allow_repeats = false
+
+[Database Parameters]
+#database_url = 	mysql://mirrorlab:backwardsr@127.0.0.1:3306/mirrorlabdb
+database_url = sqlite:///summer2022.db
+#database_url = postgres://hdptttbagflswd:06319420c82ab7fd21aed15c34bc9db0891da6066bb969cc5d68b8931a7ef21e@ec2-18-209-153-180.compute-1.amazonaws.com:5432/df3ksosen515fv
+
+table_name = hri021
+
+[Server Parameters]
+host = localhost
+port = 22362
+cutoff_time = 60
+logfile = server.log
+loglevel = 2
+debug = false
+login_username = examplename
+login_pw = examplepassword
+threads = 1
+secret_key = 'this is my secret key which is hard to guess, i should change this'
+#certfile = <path_to.crt> 
+#keyfile = <path_to.key>
+#adserver_revproxy_host = www.location.of.your.revproxy.sans.protocol.com
+#adserver_revproxy_port = 80 # defaults to 80
+
+[Task Parameters]
+experiment_code_version = 6.1
+num_conds = 3
+num_counters = 1
+
+[Shell Parameters]
+launch_in_sandbox_mode = true
+
+# If you are not using the psiturk ad server, set `use_psiturk_ad_server` to `false` and point `ad_location` to your proxy server <host> and <port>. Format the ad_location like this:
+#
+#   https://<host>:<port>/ad
+
+ad_location = https://floating-waters-49245.herokuapp.com/pub
+
+use_psiturk_ad_server = false
+#ad_location = true
