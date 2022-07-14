@@ -16,6 +16,7 @@ var mycounterbalance = counterbalance;  // they tell you which condition you hav
 // All pages to be loaded
 var pages = [
     "instruct-1.html",
+    "check_video.html",
     "payment.html",
     "suspend.html",
     "response_video.html",
@@ -24,7 +25,8 @@ var pages = [
     "questionSliders.html",
     "questionFreeResponse.html",
     "responseType.html",
-    "demographics.html"
+    "demographics.html",
+    "check_question.html"
 ];
 
 
@@ -108,13 +110,13 @@ var PaymentQuestionnaire = function() {
 
         psiTurk.recordTrialData({'phase':'paymentquestionnaire', 'status':'submit'});
 
-        $('input[name=email]').each( function(i, val) {
-            psiTurk.recordUnstructuredData(this.id, this.value);
-        });
+        // $('input[name=email]').each( function(i, val) {
+        //     psiTurk.recordUnstructuredData(this.id, this.value);
+        // });
         
-        $('input[name=cwid]').each( function(i, val) {
-            psiTurk.recordUnstructuredData(this.id, this.value);
-        });
+        // $('input[name=cwid]').each( function(i, val) {
+        //     psiTurk.recordUnstructuredData(this.id, this.value);
+        // });
         
         $('input[name=age]').each( function(i, val) {
             psiTurk.recordUnstructuredData(this.id, this.value);
@@ -152,7 +154,7 @@ var PaymentQuestionnaire = function() {
     window.scrollTo(0, 0);
     psiTurk.recordTrialData({'phase':'paymentquestionnaire', 'status':'begin'});
 
-    var r1, r2, r3 = false;
+    var r1 = false;
 
     (function() {
         var empty = true;
@@ -175,88 +177,76 @@ var PaymentQuestionnaire = function() {
         });
     })();
     
-    (function() {
-	var empty = true;
-	$('#cwid').keyup(function() {
+    // (function() {
 
-            empty = false;
-            $('#cwid').each(function() {
-		if ($(this).val() == '') {
-                    empty = true;
-		}
-            });
+    //     var empty = true;
+    //     $('#cwid').keyup(function() {
 
-            if (empty) {
-		 r2 = false;
-		 checkenable();
-            } else {
-		r2 = true;
-		checkenable();
-            }
-	});
-    })();
+    //             empty = false;
+    //             $('#cwid').each(function() {
+    //                 if ($(this).val() == '') {
+    //                     empty = true;
+    //                 }
+    //             });
 
-    (function() {
-	var empty = true;
-	$('#email').keyup(function() {
+    //             if (empty) {
+    //                 r2 = false;
+    //                 checkenable();
+    //             } else {
+    //                 r2 = true;
+    //                 checkenable();
+    //             }
+    //     });
+    // })(); 
 
-            empty = false;
-            $('#email').each(function() {
-		if ($(this).val() == '') {
-                    empty = true;
-		}
-            });
+    // (function() {
+    //     var empty = true;
+    //     $('#email').keyup(function() {
+    //         empty = false;
+    //         $('#email').each(function() {
+    //             if ($(this).val() == '') {
+    //                 empty = true;
+    //             }
+    //         });
 
-            if (empty) {
-		 r3 = false;
-		 checkenable();
-            } else {
-		r3 = true;
-		checkenable();
-            }
-	});
-    })();
+    //         if (empty) {
+    //             r3 = false;
+    //             checkenable();
+    //         } else {
+    //             r3 = true;
+    //             checkenable();
+    //         }
+    //     });
+    // })(); 
     
-    function checkenable(){
-	if (r1 && r2 && r3){
-	    $('#next').removeAttr('disabled');
-	}
-	else {
-	    $('#next').prop('disabled', true);
-	}
+    function checkenable() {
+        if (r1){
+            $('#next').removeAttr('disabled');
+        } else {
+            $('#next').prop('disabled', true);
+        }
     }
     
     $("#next").click(function () {
     	record_responses();
-        currentview = new PreInterest();
+        currentview = new VidCheck();
     }); 
 };
 
-
-
 /***************
- * Pre-Interest   *
+ * Video Check *
  ***************/
 
-var PreInterest = function() {
-
+ var VidCheck = function() {
+    
     var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your information. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
 
+    var ppcounter = 0;
+    var rscounter = 0;
+
     record_responses = function() {
-
-        psiTurk.recordTrialData({'phase':'pre-interest', 'status':'submit'});
-
-        var radio_groups = {}
-        $(":radio").each(function(i, val){
-            radio_groups[this.name] = true;
-        })
-
-            for(group in radio_groups){
-                //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
-                psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
-            }
+        psiTurk.recordTrialData({'phase':'vidcheck', 'status':'submit'});	
     };
-
 
     prompt_resubmit = function() {
         replaceBody(error_message);
@@ -269,46 +259,144 @@ var PreInterest = function() {
         psiTurk.saveData({
             success: function() {
                 clearInterval(reprompt);
-            },
+            }, 
             error: prompt_resubmit
         });
     };
+    
+    // Load the questionnaire snippet 
+    psiTurk.showPage('check_video.html');
+    window.scrollTo(0, 0);
+    psiTurk.recordTrialData({'phase':'vidcheck', 'status':'begin'});
 
+    var r1, r2, r3 = false;
 
-    // Load the questionnaire snippet
-    psiTurk.showPage('pre-interest.html');
-
-
-    function hasClass(element, cls) {
-        return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-    }
-
-
-    $(":radio").change(function(i, val){
-        var names = {};
-        $("input:radio").each(function(){
-            names[$(this).attr('name')] = true;
-        });
-        var count = 0;
-        $.each(names, function() {
-            count++;
-        });
-        if ($("input:radio:checked").length == count) {
+    function checkenable(){
+        if (r1 && r2 && r3){
             $('#next').removeAttr('disabled');
         }
+        else {
+            $('#next').prop('disabled', true);
+        }
+    }
+
+    $("input[name=seeword]").keyup(function(){
+        var word = $("input[name=seeword]").val();
+        word = word.toLowerCase();
+        r1 = false;
+        if (word.includes("amazing")) {
+            r1=true;
+        }
+        checkenable();
     });
 
-
-    window.scrollTo(0, 0);
-
-    psiTurk.recordTrialData({'phase':'pre-interest', 'status':'begin'});
-
+    $("input[name=hearword]").keyup(function(){
+        var word = $("input[name=hearword]").val();
+        word = word.toLowerCase();
+        r2 = false;
+        if (word.includes("forest")) {
+            r2 = true;
+        }
+        checkenable();
+    });
+    
+    $("#video1").on('ended', function() {
+        psiTurk.recordTrialData({'phase':'vidcheck', 'status':'video ended'});
+        r3 = true;
+        checkenable();
+    });
+    
+    $("#ppbutton").click(function () {
+        psiTurk.recordTrialData({'phase':'vidcheck', 'status':'play/pause clicked: '+ppcounter});
+        ppcounter += 1;
+    });
+    
+    $("#rsbutton").click(function () {
+        psiTurk.recordTrialData({'phase':'vidcheck', 'status':'restart clicked: '+rscounter});
+        rscounter += 1;
+    });
 
     $("#next").click(function () {
         record_responses();
         currentview = new Video();
     });
 };
+
+/***************
+ * Pre-Interest   *
+ ***************/
+
+// var PreInterest = function() {
+
+//     var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your information. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+//     record_responses = function() {
+
+//         psiTurk.recordTrialData({'phase':'pre-interest', 'status':'submit'});
+
+//         var radio_groups = {}
+//         $(":radio").each(function(i, val){
+//             radio_groups[this.name] = true;
+//         })
+
+//             for(group in radio_groups){
+//                 //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
+//                 psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
+//             }
+//     };
+
+
+//     prompt_resubmit = function() {
+//         replaceBody(error_message);
+//         $("#resubmit").click(resubmit);
+//     };
+
+//     resubmit = function() {
+//         replaceBody("<h1>Trying to resubmit...</h1>");
+//         reprompt = setTimeout(prompt_resubmit, 10000);
+//         psiTurk.saveData({
+//             success: function() {
+//                 clearInterval(reprompt);
+//             },
+//             error: prompt_resubmit
+//         });
+//     };
+
+
+//     // Load the questionnaire snippet
+//     psiTurk.showPage('pre-interest.html');
+
+
+//     function hasClass(element, cls) {
+//         return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+//     }
+
+
+//     $(":radio").change(function(i, val){
+//         var names = {};
+//         $("input:radio").each(function(){
+//             names[$(this).attr('name')] = true;
+//         });
+//         var count = 0;
+//         $.each(names, function() {
+//             count++;
+//         });
+//         if ($("input:radio:checked").length == count) {
+//             $('#next').removeAttr('disabled');
+//         }
+//     });
+
+
+//     window.scrollTo(0, 0);
+
+//     psiTurk.recordTrialData({'phase':'pre-interest', 'status':'begin'});
+
+
+//     $("#next").click(function () {
+//         record_responses();
+//         currentview = new Video();
+//     });
+// };
 
 
 
@@ -550,9 +638,9 @@ var Question2 = function() {
 
 
 
-/***************
+/*******************
  * Post-Interest   *
- ***************/
+ *******************/
 
 var PostInterest = function() {
 
@@ -702,12 +790,87 @@ var ResponseType = function() {
 
     $("#next").click(function () {
         record_responses();
-        currentview = new Demographics();
+        currentview = new QuestionCheck();
     });
 
 };
 
+/*******************
+ * Check_Question   *
+ *******************/
+var QuestionCheck = function() {
 
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your information. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function() {
+
+        // CHANGE
+        psiTurk.recordTrialData({'phase':'question_check', 'status':'submit'});
+
+        var radio_groups = {}
+        $(":radio").each(function(i, val){
+            radio_groups[this.name] = true;
+        })
+
+        for(group in radio_groups){
+            //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
+            psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
+        }
+
+    };
+
+
+    prompt_resubmit = function() {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function() {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+        psiTurk.saveData({
+            success: function() {
+                clearInterval(reprompt);
+            },
+            error: prompt_resubmit
+        });
+    };
+
+
+    // Load the questionnaire snippet
+    psiTurk.showPage('check_question.html');
+
+    function hasClass(element, cls) {
+        return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+    }
+
+
+    $(":radio").change(function(i, val){
+        var names = {};
+        $("input:radio").each(function(){
+            names[$(this).attr('name')] = true;
+        });
+        var count = 0;
+        $.each(names, function() {
+            count++;
+        });
+        if ($("input:radio:checked").length == count) {
+            $('#next').removeAttr('disabled');
+        }
+    });
+
+
+    window.scrollTo(0, 0);
+    // CHANGE
+    psiTurk.recordTrialData({'phase':'question_check', 'status':'begin'});
+
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Demographics();
+    });
+
+}
 
 /****************
  * Demographics *
