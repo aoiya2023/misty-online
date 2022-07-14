@@ -13,9 +13,7 @@ browser_exclude_rule = MSIE, mobile, tablet
 allow_repeats = false
 
 [Database Parameters]
-#database_url = 	mysql://mirrorlab:backwardsr@127.0.0.1:3306/mirrorlabdb
 database_url = sqlite:///summer2022.db
-#database_url = postgres://hdptttbagflswd:06319420c82ab7fd21aed15c34bc9db0891da6066bb969cc5d68b8931a7ef21e@ec2-18-209-153-180.compute-1.amazonaws.com:5432/df3ksosen515fv
 
 table_name = hri021
 
