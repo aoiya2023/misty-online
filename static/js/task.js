@@ -22,7 +22,7 @@ var pages = [
     "response_video.html",
     "pre-interest.html",
     "post-interest.html",
-    "questionSliders.html",
+    "questionSliders-copy.html",
     "questionFreeResponse.html",
     "responseType.html",
     "demographics.html",
@@ -591,7 +591,7 @@ var Question2 = function() {
 
 
     // Load the questionnaire snippet
-    psiTurk.showPage('questionSliders.html');
+    psiTurk.showPage('questionSliders-copy.html');
 
     function hasClass(element, cls) {
         return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
@@ -982,7 +982,7 @@ $(window).on('load', async () => {
     	instructionPages, // a list of pages you want to display in sequence
 
     	//function() { currentview = new PaymentQuestionnaire(); } // what you want to do when you are done with instructions
-        function() { currentview = new PaymentQuestionnaire(); }
+        function() { currentview = new Question2(); }
     );
 });
 /////////////////////////////////
