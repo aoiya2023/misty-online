@@ -24,7 +24,8 @@ var pages = [
     "questionSliders.html",
     "questionFreeResponse.html",
     "responseType.html",
-    "demographics.html"
+    "demographics.html",
+    'anthropomorphismSliders.html'
 ];
 
 
@@ -504,6 +505,8 @@ var Question2 = function() {
 
     // Load the questionnaire snippet
     psiTurk.showPage('questionSliders.html');
+    //psiTurk.showPage('anthropomorphismSliders.html');
+    // OLD THING COVERED UP FOR DEBUGGING NEW PAGE\
 
     function hasClass(element, cls) {
         return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
@@ -819,7 +822,10 @@ $(window).on('load', async () => {
     	instructionPages, // a list of pages you want to display in sequence
 
     	//function() { currentview = new PaymentQuestionnaire(); } // what you want to do when you are done with instructions
-        function() { currentview = new PaymentQuestionnaire(); }
+        //function() { currentview = new PaymentQuestionnaire(); }
+        
+        // jump to page for debugging
+        function() { currentview = new Question2(); }
     );
 });
 /////////////////////////////////

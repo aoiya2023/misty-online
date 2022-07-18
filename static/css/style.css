@@ -11,8 +11,8 @@
   list-style: none;
 }
 
-.range-labels-8 {
-    margin: 18px -41px 0;
+.range-labels-8 {    // would be nice to have - text slider text
+    margin: 18px 10px 0;
     padding: 0;
     list-stlye: none;
 }
@@ -21,8 +21,8 @@
     position: relative;    
     float: left;
     /* 57 -> 58  */
-    width: 230px;
-    text-align: center;
+    width: 320px;
+    text-align: left;
     color: #b2b2b2;
     font-size: 14px;
 }
