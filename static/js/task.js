@@ -22,6 +22,7 @@ var pages = [
     "response_video.html",
     "pre-interest.html",
     "post-interest.html",
+    "questionSliders.html",
     "questionSliders-copy.html",
     "questionFreeResponse.html",
     "responseType.html",
@@ -123,6 +124,7 @@ var PaymentQuestionnaire = function() {
         });
 
         var radio_groups = {}
+
         $(":radio").each(function(i, val){
             radio_groups[this.name] = true;
         });
@@ -143,7 +145,7 @@ var PaymentQuestionnaire = function() {
 	
         psiTurk.saveData({
             success: function() {
-        	clearInterval(reprompt);       
+        	    clearInterval(reprompt);       
             }, 
             error: prompt_resubmit
         });
@@ -274,8 +276,7 @@ var PaymentQuestionnaire = function() {
     function checkenable(){
         if (r1 && r2 && r3){
             $('#next').removeAttr('disabled');
-        }
-        else {
+        } else {
             $('#next').prop('disabled', true);
         }
     }
@@ -565,9 +566,10 @@ var Question2 = function() {
 
     record_responses = function() {
         psiTurk.recordTrialData({'phase':'slider_questions', 'status':'submit'});
-        for(i=1; i<=11; i++){
-	    var variable = document.getElementById(i);
+        for(i=1; i<=3; i++){
+	        var variable = document.getElementById(i);
     	    psiTurk.recordUnstructuredData("slider_question_"+(i),$("input[name='"+i+"']").val());
+            // console.log("slider_question_"+(i),$("input[name='"+i+"']").val());
 
         }
     };
@@ -578,15 +580,15 @@ var Question2 = function() {
     };
 
     resubmit = function() {
-	replaceBody("<h1>Trying to resubmit...</h1>");
-	reprompt = setTimeout(prompt_resubmit, 10000);
+	    replaceBody("<h1>Trying to resubmit...</h1>");
+	    reprompt = setTimeout(prompt_resubmit, 10000);
 
-	psiTurk.saveData({
-	    success: function() {
-		clearInterval(reprompt);
-	    },
-	    error: prompt_resubmit
-	});
+        psiTurk.saveData({
+            success: function() {
+                clearInterval(reprompt);
+            },
+            error: prompt_resubmit
+        });
     };
 
 
@@ -594,37 +596,39 @@ var Question2 = function() {
     psiTurk.showPage('questionSliders-copy.html');
 
     function hasClass(element, cls) {
+        console.log(element)
         return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
     }
 
     function checkenable(){
         allclicked=true;
 
-	for(i=1; i<=11; i++) {
-	    var slider = document.getElementById(i);
-	    if(hasClass(slider, 'not-clicked')) {
-		allclicked = false;
-		//console.log("slider " + i + " not clicked");
-	    }
-	}
+        for(i=1; i<=3; i++) {
+            var slider = document.getElementById(i);
+            if(hasClass(slider, "not-clicked")) {
+                allclicked = false;
+                //console.log("slider " + i + " not clicked");
+            }
+        }
 
         if(allclicked){
-	    $('#next').removeAttr('disabled');
-        }
-	else {
-	    $('#next').attr('disabled', 'disabled');
-	}
+	        $('#next').removeAttr('disabled');
+        } else {
+	        $('#next').attr('disabled', 'disabled');
+	    }
     }
 
 
     $(".not-clicked").click(function(e){
-	$(this).removeClass('not-clicked');
-	$(this).addClass('clicked');
+        console.log(this.className);
+	    $(this).removeClass('not-clicked');
+	    $(this).addClass('clicked');
+        console.log(this.className);
         checkenable();
     });
 
     $(".check").click(function(e){
-	checkenable();
+	    checkenable();
     });
 
     window.scrollTo(0, 0);
@@ -632,7 +636,7 @@ var Question2 = function() {
 
     $("#next").click(function () {
         record_responses();
-	currentview = new PostInterest();
+	    currentview = new PostInterest();
     })
 };
 
@@ -655,10 +659,10 @@ var PostInterest = function() {
             radio_groups[this.name] = true;
         })
 
-            for(group in radio_groups){
-                //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
-                psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
-            }
+        for(group in radio_groups){
+            //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
+            psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
+        }
     };
 
 
