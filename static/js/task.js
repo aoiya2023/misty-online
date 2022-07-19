@@ -504,8 +504,8 @@ var Question2 = function() {
 
 
     // Load the questionnaire snippet
-    psiTurk.showPage('questionSliders.html');
-    //psiTurk.showPage('anthropomorphismSliders.html');
+    //psiTurk.showPage('questionSliders.html');
+    psiTurk.showPage('anthropomorphismSliders.html');
     // OLD THING COVERED UP FOR DEBUGGING NEW PAGE\
 
     function hasClass(element, cls) {
