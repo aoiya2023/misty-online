@@ -27,7 +27,10 @@ var pages = [
     "questionFreeResponse.html",
     "responseType.html",
     "demographics.html",
-    "check_question.html"
+    "check_question.html",
+    "anthropomorphismSliders.html",
+    "likabilitySliders.html",
+    "moralStatus.html"
 ];
 
 // psiTurk 3 version //

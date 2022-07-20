@@ -4,7 +4,6 @@
   padding: 0;
   list-style: none;
 }
-
 .range-labels-7 {
   margin: 18px -41px 0;
   padding: 0;
@@ -33,7 +32,6 @@
     padding: 0;
     list-style: none;
 }
-
 .range-labels-8 li {
     position: relative;    
     float: left;
@@ -282,11 +280,9 @@ h1 {
 .checkboxes input {
     vertical-align: 0px;
 }
-
 .checkboxes label span {
     vertical-align: 0px;
 }
-
 */
 
 .row-question {
