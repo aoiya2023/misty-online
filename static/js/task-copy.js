@@ -30,6 +30,22 @@ var pages = [
     "check_question.html"
 ];
 
+
+//window.resizeTo(screen.width, screen.height);
+
+/*const init = (aysnc () => {
+    await psiTurk.preloadPages(pages);
+    })()*/
+
+// async function init() {
+//     await psiTurk.preloadPages(pages);
+// }
+
+//psiTurk.preloadPages(pages);
+
+
+
+
 // psiTurk 3 version //
 const init = (async () => {
     await psiTurk.preloadPages(pages);
@@ -40,9 +56,13 @@ const init = (async () => {
 // psiTurk.preloadPages(pages);
 ///////////////////////
 
+
+
+
 var instructionPages = [ // add as a list as many pages as you like
     "instruct-1.html"
 ];
+
 
 /********************
  * HTML manipulation
@@ -53,6 +73,9 @@ var instructionPages = [ // add as a list as many pages as you like
  * insert them into the document.
  *
  ********************/
+
+
+
 
 var Suspend = function() {
 
@@ -66,8 +89,14 @@ var Suspend = function() {
     psiTurk.recordTrialData({'phase':'suspend', 'status':'begin'});
 };
 
+
+
+
+
+
+
 /***********************
- * Pre-Experiment Information *
+ * Payment Information *
  ***********************/
 var PaymentQuestionnaire = function() {
 
@@ -78,9 +107,18 @@ var PaymentQuestionnaire = function() {
     record_responses = function() {
 
         psiTurk.recordUnstructuredData("condition",mycondition);
+        //alert(mycondition);
 
         psiTurk.recordTrialData({'phase':'paymentquestionnaire', 'status':'submit'});
 
+        // $('input[name=email]').each( function(i, val) {
+        //     psiTurk.recordUnstructuredData(this.id, this.value);
+        // });
+        
+        // $('input[name=cwid]').each( function(i, val) {
+        //     psiTurk.recordUnstructuredData(this.id, this.value);
+        // });
+        
         $('input[name=age]').each( function(i, val) {
             psiTurk.recordUnstructuredData(this.id, this.value);
         });
@@ -91,6 +129,7 @@ var PaymentQuestionnaire = function() {
             radio_groups[this.name] = true;
         });
         for(group in radio_groups){
+            //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
             psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
         }
     };
@@ -140,6 +179,47 @@ var PaymentQuestionnaire = function() {
         });
     })();
     
+    // (function() {
+
+    //     var empty = true;
+    //     $('#cwid').keyup(function() {
+
+    //             empty = false;
+    //             $('#cwid').each(function() {
+    //                 if ($(this).val() == '') {
+    //                     empty = true;
+    //                 }
+    //             });
+
+    //             if (empty) {
+    //                 r2 = false;
+    //                 checkenable();
+    //             } else {
+    //                 r2 = true;
+    //                 checkenable();
+    //             }
+    //     });
+    // })(); 
+
+    // (function() {
+    //     var empty = true;
+    //     $('#email').keyup(function() {
+    //         empty = false;
+    //         $('#email').each(function() {
+    //             if ($(this).val() == '') {
+    //                 empty = true;
+    //             }
+    //         });
+
+    //         if (empty) {
+    //             r3 = false;
+    //             checkenable();
+    //         } else {
+    //             r3 = true;
+    //             checkenable();
+    //         }
+    //     });
+    // })(); 
     
     function checkenable() {
         if (r1){
@@ -158,6 +238,7 @@ var PaymentQuestionnaire = function() {
 /***************
  * Video Check *
  ***************/
+
  var VidCheck = function() {
     
     var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your information. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
@@ -242,6 +323,84 @@ var PaymentQuestionnaire = function() {
     });
 };
 
+/***************
+ * Pre-Interest   *
+ ***************/
+
+// var PreInterest = function() {
+
+//     var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your information. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+//     record_responses = function() {
+
+//         psiTurk.recordTrialData({'phase':'pre-interest', 'status':'submit'});
+
+//         var radio_groups = {}
+//         $(":radio").each(function(i, val){
+//             radio_groups[this.name] = true;
+//         })
+
+//             for(group in radio_groups){
+//                 //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
+//                 psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
+//             }
+//     };
+
+
+//     prompt_resubmit = function() {
+//         replaceBody(error_message);
+//         $("#resubmit").click(resubmit);
+//     };
+
+//     resubmit = function() {
+//         replaceBody("<h1>Trying to resubmit...</h1>");
+//         reprompt = setTimeout(prompt_resubmit, 10000);
+//         psiTurk.saveData({
+//             success: function() {
+//                 clearInterval(reprompt);
+//             },
+//             error: prompt_resubmit
+//         });
+//     };
+
+
+//     // Load the questionnaire snippet
+//     psiTurk.showPage('pre-interest.html');
+
+
+//     function hasClass(element, cls) {
+//         return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+//     }
+
+
+//     $(":radio").change(function(i, val){
+//         var names = {};
+//         $("input:radio").each(function(){
+//             names[$(this).attr('name')] = true;
+//         });
+//         var count = 0;
+//         $.each(names, function() {
+//             count++;
+//         });
+//         if ($("input:radio:checked").length == count) {
+//             $('#next').removeAttr('disabled');
+//         }
+//     });
+
+
+//     window.scrollTo(0, 0);
+
+//     psiTurk.recordTrialData({'phase':'pre-interest', 'status':'begin'});
+
+
+//     $("#next").click(function () {
+//         record_responses();
+//         currentview = new Video();
+//     });
+// };
+
+
+
 
 /******************
  *     Video      *
@@ -313,16 +472,17 @@ var Video = function() {
 
     $("#next").click(function () {
         record_responses();
-        currentview = new FreeResponse();
+        currentview = new Question3();
     });
 };
 
 
 
-/*******************
- *  Free response  *
- *******************/
-var FreeResponse = function() {
+/******************************************
+ *  Question 3 - Free response questions  *
+ ******************************************/
+
+var Question3 = function() {
 
     var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your information. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
 
@@ -390,24 +550,26 @@ var FreeResponse = function() {
 
     $("#next").click(function () {
         record_responses();
-        currentview = new Anthropomorphism();
+        currentview = new Question2();
     });
 
 };
 
+
 /*********************************
- * Anthropomorphism *
+ * Question 2 - Slider questions *
  *********************************/
 
- var Anthropomorphism = function() {
+var Question2 = function() {
 
     var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
 
     record_responses = function() {
-        psiTurk.recordTrialData({'phase':'anthropomorphism', 'status':'submit'});
+        psiTurk.recordTrialData({'phase':'slider_questions', 'status':'submit'});
         for(i=1; i<=3; i++){
 	        var variable = document.getElementById(i);
-    	    psiTurk.recordUnstructuredData("anthropomorphism_"+(i),$("input[name='"+i+"']").val());
+    	    psiTurk.recordUnstructuredData("slider_question_"+(i),$("input[name='"+i+"']").val());
+            // console.log("slider_question_"+(i),$("input[name='"+i+"']").val());
 
         }
     };
@@ -445,6 +607,7 @@ var FreeResponse = function() {
             var slider = document.getElementById(i);
             if(hasClass(slider, "not-clicked")) {
                 allclicked = false;
+                //console.log("slider " + i + " not clicked");
             }
         }
 
@@ -457,8 +620,10 @@ var FreeResponse = function() {
 
 
     $(".not-clicked").click(function(e){
+        console.log(this.className);
 	    $(this).removeClass('not-clicked');
 	    $(this).addClass('clicked');
+        console.log(this.className);
         checkenable();
     });
 
@@ -467,93 +632,14 @@ var FreeResponse = function() {
     });
 
     window.scrollTo(0, 0);
-    psiTurk.recordTrialData({'phase':'anthropomorphism', 'status':'begin'});
-
-    $("#next").click(function () {
-        record_responses();
-	    currentview = new Likeability();
-    })
-};
-
-/*********************************
- * Likeability *
- *********************************/
-
- var Likeability = function() {
-
-    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
-
-    record_responses = function() {
-        psiTurk.recordTrialData({'phase':'likeability', 'status':'submit'});
-        for(i=1; i<=3; i++){
-	        var variable = document.getElementById(i);
-    	    psiTurk.recordUnstructuredData("likeability_"+(i),$("input[name='"+i+"']").val());
-
-        }
-    };
-
-    prompt_resubmit = function() {
-        replaceBody(error_message);
-        $("#resubmit").click(resubmit);
-    };
-
-    resubmit = function() {
-	    replaceBody("<h1>Trying to resubmit...</h1>");
-	    reprompt = setTimeout(prompt_resubmit, 10000);
-
-        psiTurk.saveData({
-            success: function() {
-                clearInterval(reprompt);
-            },
-            error: prompt_resubmit
-        });
-    };
-
-
-    // Load the questionnaire snippet
-    psiTurk.showPage('questionSliders-copy.html');
-
-    function hasClass(element, cls) {
-        console.log(element)
-        return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-    }
-
-    function checkenable(){
-        allclicked=true;
-
-        for(i=1; i<=3; i++) {
-            var slider = document.getElementById(i);
-            if(hasClass(slider, "not-clicked")) {
-                allclicked = false;
-            }
-        }
-
-        if(allclicked){
-	        $('#next').removeAttr('disabled');
-        } else {
-	        $('#next').attr('disabled', 'disabled');
-	    }
-    }
-
-
-    $(".not-clicked").click(function(e){
-	    $(this).removeClass('not-clicked');
-	    $(this).addClass('clicked');
-        checkenable();
-    });
-
-    $(".check").click(function(e){
-	    checkenable();
-    });
-
-    window.scrollTo(0, 0);
-    psiTurk.recordTrialData({'phase':'likeability', 'status':'begin'});
+    psiTurk.recordTrialData({'phase':'slider_questions', 'status':'begin'});
 
     $("#next").click(function () {
         record_responses();
 	    currentview = new PostInterest();
     })
 };
+
 
 
 /*******************
@@ -708,7 +794,7 @@ var ResponseType = function() {
 
     $("#next").click(function () {
         record_responses();
-        currentview = new AttentionCheck();
+        currentview = new QuestionCheck();
     });
 
 };
@@ -716,14 +802,14 @@ var ResponseType = function() {
 /*******************
  * Check_Question   *
  *******************/
-var AttentionCheck = function() {
+var QuestionCheck = function() {
 
     var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your information. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
 
     record_responses = function() {
 
         // CHANGE
-        psiTurk.recordTrialData({'phase':'attention_check', 'status':'submit'});
+        psiTurk.recordTrialData({'phase':'question_check', 'status':'submit'});
 
         var radio_groups = {}
         $(":radio").each(function(i, val){
@@ -733,13 +819,6 @@ var AttentionCheck = function() {
         for(group in radio_groups){
             //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
             psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
-        }
-
-        // i is the number of slider questions
-        for(i=1; i<=1; i++){
-	        var variable = document.getElementById(i);
-    	    psiTurk.recordUnstructuredData("speech_"+(i),$("input[name='"+i+"']").val());
-
         }
 
     };
@@ -769,44 +848,25 @@ var AttentionCheck = function() {
         return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
     }
 
-    function checkenable(){
-        slider_clicked=true;
-        radio_clicked=true;
 
-        for(i=1; i<=1; i++) {
-            var slider = document.getElementById(i);
-            if(hasClass(slider, "not-clicked")) {
-                slider_clicked = false;
-                //console.log("slider " + i + " not clicked");
-            }
+    $(":radio").change(function(i, val){
+        var names = {};
+        $("input:radio").each(function(){
+            names[$(this).attr('name')] = true;
+        });
+        var count = 0;
+        $.each(names, function() {
+            count++;
+        });
+        if ($("input:radio:checked").length == count) {
+            $('#next').removeAttr('disabled');
         }
-
-        if ($('input[type=radio]:checked').size() > 0) {
-            radio_clicked = true;
-        } else {
-            radio_clicked = false;
-        }
-
-        if(slider_clicked && radio_clicked){
-	        $('#next').removeAttr('disabled');
-        } else {
-	        $('#next').attr('disabled', 'disabled');
-	    }
-    }
-
-    $(".not-clicked").click(function(e){
-	    $(this).removeClass('not-clicked');
-	    $(this).addClass('clicked');
-        checkenable();
     });
 
-    $(":radio").change(function(e){
-	    checkenable();
-    });
 
     window.scrollTo(0, 0);
     // CHANGE
-    psiTurk.recordTrialData({'phase':'attention_check', 'status':'begin'});
+    psiTurk.recordTrialData({'phase':'question_check', 'status':'begin'});
 
 
     $("#next").click(function () {
@@ -836,13 +896,22 @@ var Demographics = function() {
         })
 
         for(group in radio_groups){
-            alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
+            //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
             psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
+            // console.log(group,$(":radio[name='"+group+"']:checked").val());
         }
             
         $('input[name=other_gender_text]').each( function(i, val) {
             psiTurk.recordUnstructuredData(this.name, this.value);
         });
+        $('input[name=other_education_text]').each( function(i, val) {
+            psiTurk.recordUnstructuredData(this.name, this.value);
+        });
+        $('input[name=other_nation_text]').each( function(i, val) {
+            psiTurk.recordUnstructuredData(this.name, this.value);
+        });
+        
+        
         
     };
 
@@ -855,12 +924,12 @@ var Demographics = function() {
     resubmit = function() {
         replaceBody("<h1>Trying to resubmit...</h1>");
         reprompt = setTimeout(prompt_resubmit, 10000);
-        // psiTurk.saveData({
-        //     success: function() {
-        //         clearInterval(reprompt);                
-        //     }, 
-        //     error: prompt_resubmit
-        // });
+        psiTurk.saveData({
+            success: function() {
+                clearInterval(reprompt);                
+            }, 
+            error: prompt_resubmit
+        });
     };
 
     
@@ -918,7 +987,7 @@ $(window).on('load', async () => {
     	instructionPages, // a list of pages you want to display in sequence
 
     	//function() { currentview = new PaymentQuestionnaire(); } // what you want to do when you are done with instructions
-        function() { currentview = new AttentionCheck(); }
+        function() { currentview = new Demographics(); }
     );
 });
 /////////////////////////////////

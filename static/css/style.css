@@ -15,14 +15,16 @@
   text-align: center;
   color: #b2b2b2;
   font-size: 14px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .range-label.left {
-  margin-right: 10px;
+  margin-right: 30px;
 } 
 
 .range-label.right {
-  margin-left: 10px;
+  margin-left: 30px;
 }
 
 /* questionSliders */
@@ -89,7 +91,7 @@ span {
   flex-direction: row;
   justify-content: center;
   width: 600px;
-  height: 10px;
+  height: 50px;
   float: left;
   /* padding-bottom: 20px; */
 }
