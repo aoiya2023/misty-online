@@ -282,24 +282,24 @@ var Video = function() {
     //TODO
     //console.log("mycondition:  " + mycondition);
     if (mycondition % 5 == 0) {
-        $("#mp4src").attr("src", "/static/videos/US_final_older_aggressive.mp4")
-        $("#oggsrc").attr("src", "/static/videos/US_final_older_aggressive.ogv")
+        $("#mp4src").attr("src", "/static/videos/mp4_videos/misty_null.mp4")
+        $("#oggsrc").attr("src", "/static/videos/ogg_videos/misty_null.ogg")
     }
     else if (mycondition % 5 == 1) {
-        $("#mp4src").attr("src", "/static/videos/US_final_older_argumentative.mp4")
-        $("#oggsrc").attr("src", "/static/videos/US_final_older_argumentative.ogv")
+        $("#mp4src").attr("src", "/static/videos/mp4_videos/misty_they_them.mp4")
+        $("#oggsrc").attr("src", "/static/videos/ogg_videos/misty_they_them.ogg")
     }
     else if (mycondition % 5 == 2) {
-        $("#mp4src").attr("src", "/static/videos/US_final_older_control.mp4")
-        $("#oggsrc").attr("src", "/static/videos/US_final_older_control.ogv")
+        $("#mp4src").attr("src", "/static/videos/mp4_videos/misty_it_its.mp4")
+        $("#oggsrc").attr("src", "/static/videos/ogg_videos/misty_it_its.ogg")
     }
     else if (mycondition % 5 == 3) {
-        $("#mp4src").attr("src", "/static/videos/US_final_older_control.mp4")
-        $("#oggsrc").attr("src", "/static/videos/US_final_older_control.ogv")
+        $("#mp4src").attr("src", "/static/videos/mp4_videos/misty_he_him.mp4")
+        $("#oggsrc").attr("src", "/static/videos/ogg_videos/misty_he_him.ogg")
     }
     else if (mycondition % 5 == 4) {
-        $("#mp4src").attr("src", "/static/videos/US_final_older_control.mp4")
-        $("#oggsrc").attr("src", "/static/videos/US_final_older_control.ogv")
+        $("#mp4src").attr("src", "/static/videos/mp4_videos/misty_she_her.mp4")
+        $("#oggsrc").attr("src", "/static/videos/ogg_videos/misty_she_her.ogg")
     }
 
     $("#video2").load();
