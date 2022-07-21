@@ -27,7 +27,8 @@ var pages = [
     "demographics.html",
     "anthropomorphismSliders.html",
     "likabilitySliders.html",
-    "moralStatus.html"
+    "moralStatus.html",
+    "videoTest.html"
 ];
 
 
@@ -503,7 +504,7 @@ var Question2 = function() {
 
     // Load the questionnaire snippet
     //psiTurk.showPage('questionSliders.html');
-    psiTurk.showPage('moralStatus.html');
+    psiTurk.showPage('videoTest.html');
     // OLD THING COVERED UP FOR DEBUGGING NEW PAGE\
 
     function hasClass(element, cls) {
