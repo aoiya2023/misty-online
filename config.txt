@@ -1,5 +1,5 @@
 [HIT Configuration]
-title = HRI021: Robot Response to Abuse
+title = HRI022: Effects of Robot Using Pronouns
 description = Answer questions about a video simulating an interaction with a robot.
 amt_keywords = Psychology, Trust, Robot, Robots, Language, Interaction
 lifetime = 24
@@ -15,7 +15,7 @@ allow_repeats = false
 [Database Parameters]
 database_url = sqlite:///summer2022.db
 
-table_name = hri021
+table_name = hri022
 
 [Server Parameters]
 host = localhost
@@ -34,8 +34,8 @@ secret_key = 'this is my secret key which is hard to guess, i should change this
 #adserver_revproxy_port = 80 # defaults to 80
 
 [Task Parameters]
-experiment_code_version = 6.1
-num_conds = 3
+experiment_code_version = 6.2
+num_conds = 5
 num_counters = 1
 
 [Shell Parameters]
