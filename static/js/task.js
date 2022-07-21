@@ -26,7 +26,8 @@ var pages = [
     "anthropomorphismSliders.html",
     "likabilitySliders.html",
     "moralStatus.html",
-    "pronounCheck.html"
+    "pronounCheck.html",
+    "videoTest.html"
 ];
 
 // psiTurk 3 version //
