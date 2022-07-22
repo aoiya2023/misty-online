@@ -14,3 +14,5 @@
 2022-07-21 12:07:46,700 Scheduler started
 2022-07-21 14:42:31,109 Scheduler started
 2022-07-21 14:47:25,213 Scheduler started
+[2022-07-22 03:17:19 -0700] [1376] [CRITICAL] WORKER TIMEOUT (pid:1379)
+2022-07-22 03:17:32,548 Scheduler started
