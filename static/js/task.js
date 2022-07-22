@@ -68,19 +68,20 @@ var Suspend = function() {
 /***********************
  * Pre-Experiment Information *
  ***********************/
-var PaymentQuestionnaire = function() {
+var PreExperimentQuestionnaire = function() {
 
     psiTurk.finishInstructions();
     
     var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your information. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
 
     record_responses = function() {
-
+        alert("condition", mycondition);
         psiTurk.recordUnstructuredData("condition", mycondition);
 
         psiTurk.recordTrialData({'phase':'pre-experiment_questionnaire', 'status':'submit'});
 
         $('input[name=age]').each( function(i, val) {
+            alert(this.id, this.value);
             psiTurk.recordUnstructuredData(this.id, this.value);
         });
 
@@ -90,6 +91,7 @@ var PaymentQuestionnaire = function() {
             radio_groups[this.name] = true;
         });
         for(group in radio_groups){
+            alert(group,$(":radio[name='"+group+"']:checked").val());
             psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
         }
     };
@@ -336,6 +338,7 @@ var Video = function() {
         psiTurk.recordTrialData({'phase':'anthropomorphism', 'status':'submit'});
         for(i=1; i<=5; i++){
 	        var variable = document.getElementById(i);
+            alert("anthropomorphism_"+(i),$("input[name='"+i+"']").val());
     	    psiTurk.recordUnstructuredData("anthropomorphism_"+(i),$("input[name='"+i+"']").val());
 
         }
@@ -416,6 +419,7 @@ var Video = function() {
         psiTurk.recordTrialData({'phase':'likeability', 'status':'submit'});
         for(i=1; i<=5; i++){
 	        var variable = document.getElementById(i);
+            alert("likeability_"+(i),$("input[name='"+i+"']").val())
     	    psiTurk.recordUnstructuredData("likeability_"+(i),$("input[name='"+i+"']").val());
 
         }
@@ -496,6 +500,7 @@ var Video = function() {
         psiTurk.recordTrialData({'phase':'moral_status', 'status':'submit'});
         for(i=1; i<=2; i++){
 	        var variable = document.getElementById(i);
+            alert("moral_status_"+(i),$("input[name='"+i+"']").val());
     	    psiTurk.recordUnstructuredData("moral_status_"+(i),$("input[name='"+i+"']").val());
 
         }
@@ -584,7 +589,7 @@ var PronounCheck = function() {
         })
 
         for(group in radio_groups){
-            //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
+            alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
             psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
         }
 
@@ -656,14 +661,15 @@ var AttentionCheck = function() {
         })
 
         for(group in radio_groups){
-            //alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
+            alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
             psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
         }
 
         // i is the number of slider questions
         for(i=1; i<=1; i++){
 	        var variable = document.getElementById(i);
-    	    psiTurk.recordUnstructuredData("speech_"+(i),$("input[name='"+i+"']").val());
+            alert(("speech_clarity",$("input[name='"+i+"']").val()));
+    	    psiTurk.recordUnstructuredData("speech_clarity",$("input[name='"+i+"']").val());
 
         }
 
@@ -761,11 +767,12 @@ var Demographics = function() {
         })
 
         for(group in radio_groups){
-            // alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
+            alert("Recording: "+group+" "+$(":radio[name='"+group+"']:checked").val());
             psiTurk.recordUnstructuredData(group,$(":radio[name='"+group+"']:checked").val());
         }
             
         $('input[name=other_gender_text]').each( function(i, val) {
+            alert(this.name, this.value);
             psiTurk.recordUnstructuredData(this.name, this.value);
         });
         
@@ -838,7 +845,7 @@ $(window).on('load', async () => {
     	instructionPages, // a list of pages you want to display in sequence
 
     	//function() { currentview = new PaymentQuestionnaire(); } // what you want to do when you are done with instructions
-        function() { currentview = new Anthropomorphism(); }
+        function() { currentview = new PreExperimentQuestionnaire(); }
     );
 });
 /////////////////////////////////
