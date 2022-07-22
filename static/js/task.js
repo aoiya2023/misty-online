@@ -20,7 +20,6 @@ var pages = [
     "payment.html",
     "suspend.html",
     "response_video.html",
-    "pre-interest.html",
     "demographics.html",
     "check_question.html",
     "anthropomorphismSliders.html",
@@ -77,9 +76,9 @@ var PaymentQuestionnaire = function() {
 
     record_responses = function() {
 
-        psiTurk.recordUnstructuredData("condition",mycondition);
+        psiTurk.recordUnstructuredData("condition", mycondition);
 
-        psiTurk.recordTrialData({'phase':'paymentquestionnaire', 'status':'submit'});
+        psiTurk.recordTrialData({'phase':'pre-experiment_questionnaire', 'status':'submit'});
 
         $('input[name=age]').each( function(i, val) {
             psiTurk.recordUnstructuredData(this.id, this.value);
@@ -115,7 +114,7 @@ var PaymentQuestionnaire = function() {
     // Load the questionnaire snippet 
     psiTurk.showPage('payment.html');
     window.scrollTo(0, 0);
-    psiTurk.recordTrialData({'phase':'paymentquestionnaire', 'status':'begin'});
+    psiTurk.recordTrialData({'phase':'pre-experiment_questionnaire', 'status':'begin'});
 
     var r1 = false;
 
@@ -255,7 +254,7 @@ var Video = function() {
     var rscounter = 0;
 
     record_responses = function() {
-        psiTurk.recordTrialData({'phase':'response_video', 'status':'submit'});
+        psiTurk.recordTrialData({'phase':'experiment_video', 'status':'submit'});
     };
 
     prompt_resubmit = function() {
@@ -277,7 +276,7 @@ var Video = function() {
     // Load the questionnaire snippet
     psiTurk.showPage('response_video.html');
     window.scrollTo(0, 0);
-    psiTurk.recordTrialData({'phase':'response_video', 'status':'begin'});
+    psiTurk.recordTrialData({'phase':'experiment_video', 'status':'begin'});
 
     //TODO
     //console.log("mycondition:  " + mycondition);
@@ -305,17 +304,17 @@ var Video = function() {
     $("#video2").load();
 
     $("#video2").on('ended', function() {
-        psiTurk.recordTrialData({'phase':'response_video', 'status':'video ended'});
+        psiTurk.recordTrialData({'phase':'experiment_video', 'status':'video ended'});
         $('#next').removeAttr('disabled');
     });
 
     $("#ppbutton").click(function () {
-        psiTurk.recordTrialData({'phase':'response_video', 'status':'play/pause clicked: '+ppcounter});
+        psiTurk.recordTrialData({'phase':'experiment_video', 'status':'play/pause clicked: '+ppcounter});
         ppcounter += 1;
     });
 
     $("#rsbutton").click(function () {
-        psiTurk.recordTrialData({'phase':'response_video', 'status':'restart clicked: '+rscounter});
+        psiTurk.recordTrialData({'phase':'experiment_video', 'status':'restart clicked: '+rscounter});
         rscounter += 1;
     });
 
@@ -612,11 +611,6 @@ var PronounCheck = function() {
     // Load the questionnaire snippet
     psiTurk.showPage('pronounCheck.html');
 
-    function hasClass(element, cls) {
-        return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-    }
-
-
     $(":radio").change(function(i, val){
         var names = {};
         $("input:radio").each(function(){
@@ -797,11 +791,6 @@ var Demographics = function() {
     
     // Load the questionnaire snippet 
     psiTurk.showPage('demographics.html');
-    
-    function hasClass(element, cls) {
-        return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-    }
-    
         
     $(":radio").change(function(i, val){
         var names = {};
